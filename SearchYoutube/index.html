@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+            <title>Youtube API Search</title>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="Youtube Search" />
+            <!--Import Google Icon Font-->
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+            <!--Let browser know website is optimized for mobile-->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+            <link rel="stylesheet" href="css/style.css">
+            <script type="text/javascript" src="angular/angular.js"></script>
+            <script src="js/app.js"></script>
+    </head>
+
+    <body ng-app="start" ng-controller="control">
+        <header>
+            <h1 class="w100 text-center"><a href="index.html">Recherche sur Youtube</a></h1>
+        </header>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form >
+                    <input type="text" id="search" placeholder="Type something..." autocomplete="off" class="form-control" ng-model="query" />
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="submit" value="Rechercher" class="form-control btn btn-primary w100 col s11" ng-click="search(query)">
+                        </div>
+                        <div class="col s6">
+                            <input type="submit" value="Historique" class="form-control btn btn-primary w100 col s11" ng-click="history()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+                          <div class="row">
+                              <br><br> <br>
+                          </div>
+
+
+            <div  ng-if="videos!=null" id="results" class="row">
+
+                     <div class="row" ng-repeat="item in videos">
+                            <div class="col s3">
+                                <img src="{{item.snippet.thumbnails.medium.url}}" alt="" >
+                            </div>
+                         <div class="col s1">&nbsp;&nbsp;</div>
+                            <div class="col s8">
+                                <h5 class="title">{{item.snippet.title}} </h5>
+                                <p> {{item.snippet.description}} </p>
+
+                                <a  href='https://www.youtube.com/watch?v={{item.id.videoId}}'   onclick="window.open(this.href); return false;" class="secondary-content "><i class=" small material-icons  red-text text-darken-4">visibility</i></a>
+                            </div>
+
+                     </div>
+
+                    <div class="row">
+                        <a ng-show="previousPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="prev()"> <i class="material-icons left">skip_previous</i>Previous</a>
+                        &nbsp;&nbsp;
+                        <a  ng-show="nextPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="next()"> <i class="material-icons right">skip_next</i>Next</a>
+
+                    </div>
+
+            </div>
+        </div>
+     </div>
+
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.js"></script>
+
+
+
+    </body>
+</html>
+
