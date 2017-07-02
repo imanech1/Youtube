@@ -1,4 +1,4 @@
-# Youtube
+# Search in Youtube
 Cette application permet d'effectuer une recherche sur Youtube en utilisant les APIs Youtube, AngularJS, MaterializeCSS. 
 
 L'application affiche les vidéos retrouvées dans une liste (titre, lien vers la vidéo, image thumbnail). Ainsi, elle permet de parcourir tous les résultats à travers deux boutons "next" et "previous".
