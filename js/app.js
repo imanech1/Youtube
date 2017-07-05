@@ -1,17 +1,14 @@
-var app =  angular.module("start", []);
+angular.module("start", [])
 
-app.controller("control",function ($scope,$http) {
-
-
+.controller("control",function ($scope,$http) {
     $scope.videos=null;
     $scope.nextPage='';
     $scope.previousPage='';
     $scope.query="elbakara";
 
-
     $scope.history=function () {
         $http.get('historique.json').success(function (data) {
-            if(data!=null) {
+            if(data!==null) {
                 $scope.query=data.query;
                 $scope.videos=data.videos;
                 $scope.nextPage=data.next;
@@ -19,8 +16,7 @@ app.controller("control",function ($scope,$http) {
             }
             else console.log("no data");
         });
-    }
-
+    };
 
     function parseParams(obj) {
         var params = '';
@@ -32,18 +28,6 @@ app.controller("control",function ($scope,$http) {
         return params;
     }
 
-    function getVideos(API,query) {
-        var url = API.url + '/search/?q=' + query;
-        url += parseParams(API.params);
-
-        $http.get(url).success(function (data) {
-            $scope.videos=data.items;
-            $scope.nextPage=data.nextPageToken;
-            $scope.previousPage=data.prevPageToken;
-        }).error(function (err) {
-            console.log(err);
-        });
-    }
     $scope.search=function (query) {
 
         var API = {
@@ -59,7 +43,6 @@ app.controller("control",function ($scope,$http) {
         };
         var url = API.url + '/search/?q=' + query;
         url += parseParams(API.params);
-        //getVideos(API,query);
 
         $http.get(url).success(function (data) {
             $scope.videos=data.items;
@@ -69,8 +52,7 @@ app.controller("control",function ($scope,$http) {
                 method: 'POST',
                 url: 'save.php',
                 data: {'query' :$scope.query, 'next': $scope.nextPage,'prev':$scope.previousPage ,'videos': $scope.videos} ,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).
             success(function(response) {
                 console.log(response.data);
@@ -82,8 +64,20 @@ app.controller("control",function ($scope,$http) {
             console.log(err);
         });
 
-    }
+    };
 
+    function getVideos(API,query) {
+        var url = API.url + '/search/?q=' + query;
+        url += parseParams(API.params);
+
+        $http.get(url).success(function (data) {
+            $scope.videos=data.items;
+            $scope.nextPage=data.nextPageToken;
+            $scope.previousPage=data.prevPageToken;
+        }).error(function (err) {
+            console.log(err);
+        });
+    }
 
     $scope.next=function () {
 
@@ -100,10 +94,9 @@ app.controller("control",function ($scope,$http) {
             }
         };
         getVideos(API,$scope.query);
-    }
+    };
 
     $scope.prev=function () {
-
         var API = {
             url: 'https://www.googleapis.com/youtube/v3',
             params: {
@@ -117,7 +110,7 @@ app.controller("control",function ($scope,$http) {
             }
         };
         getVideos(API,$scope.query);
-    }
+    };
 });
 
 

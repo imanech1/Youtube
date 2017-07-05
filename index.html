@@ -14,7 +14,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
             <link rel="stylesheet" href="css/style.css">
-            <script type="text/javascript" src="angular/angular.js"></script>
+            <script type="text/javascript" src="js/angular.js"></script>
             <script src="js/app.js"></script>
     </head>
 
@@ -36,44 +36,34 @@
                     </div>
                 </form>
             </div>
-                          <div class="row">
-                              <br><br> <br>
-                          </div>
-
-
-            <div  ng-if="videos!=null" id="results" class="row">
-
-                     <div class="row" ng-repeat="item in videos">
-                            <div class="col s3">
-                                <img src="{{item.snippet.thumbnails.medium.url}}" alt="" >
-                            </div>
-                         <div class="col s1">&nbsp;&nbsp;</div>
-                            <div class="col s8">
-                                <h5 class="title">{{item.snippet.title}} </h5>
-                                <p> {{item.snippet.description}} </p>
-
-                                <a  href='https://www.youtube.com/watch?v={{item.id.videoId}}'   onclick="window.open(this.href); return false;" class="secondary-content "><i class=" small material-icons  red-text text-darken-4">visibility</i></a>
-                            </div>
-
-                     </div>
-
-                    <div class="row">
-                        <a ng-show="previousPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="prev()"> <i class="material-icons left">skip_previous</i>Previous</a>
-                        &nbsp;&nbsp;
-                        <a  ng-show="nextPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="next()"> <i class="material-icons right">skip_next</i>Next</a>
-
+            <div class="row">
+                <br><br> <br>
+            </div>
+            <div  ng-if="videos!==null" id="results" class="row">
+                <div class="row" ng-repeat="item in videos">
+                    <div class="col s3">
+                        <img src="{{item.snippet.thumbnails.medium.url}}" alt="" >
                     </div>
-
+                    <div class="col s1">&nbsp;&nbsp;</div>
+                    <div class="col s8">
+                        <h5 class="title">{{item.snippet.title}} </h5>
+                        <p> {{item.snippet.description}} </p>
+                        <a  href='https://www.youtube.com/watch?v={{item.id.videoId}}'  target="_blank" class="secondary-content "><i class=" small material-icons  red-text text-darken-4">visibility</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <a ng-show="previousPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="prev()">
+                        <i class="material-icons left">skip_previous</i>Previous
+                    </a>
+                        &nbsp;
+                    <a  ng-show="nextPage!=null" class="waves-effect waves-light btn btn-primary " ng-click="next()">
+                        <i class="material-icons right">skip_next</i>Next
+                    </a>
+                </div>
             </div>
         </div>
-     </div>
-
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.js"></script>
-
-
-
     </body>
 </html>
-
